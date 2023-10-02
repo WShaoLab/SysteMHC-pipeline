@@ -4,9 +4,11 @@ This is a  computational pipeline for MS-based immunopeptidomics.
 # Installation
 1. Install [Docker](https://docs.docker.com/get-docker/)
 2. Install [Nextflow](https://www.nextflow.io/docs/latest/getstarted.html#installation)
+3. Download SysteMHC-pipeline:  
+   `git clone https://github.com/WShaoLab/SysteMHC-pipeline`
 
 # Usage
-$ nextflow run /SysteMHC-pipeline/ --help  
+$ nextflow run SysteMHC-pipeline/ --help  
 N E X T F L O W  ~  version 21.10.6  
 Launching `/SysteMHC-pipeline/main.nf` [crazy_heisenberg] - revision: f88b0d422b  
 
@@ -51,9 +53,12 @@ A brief summary will be stored in Results/Summary
 ##########################################  
 
 # Example
-nextflow run SysteMHC-pipeline --dda_folder /path/to/dda_folder --comet_params Params/comet-hh-nofixmod.params \  
---fragger_params Params/fragger-classI-hh-offset.params --msgf_params Params/msgf-QE-classI.params \  
---mods Params/mymods --alleles HLA-A02_01,HLA-B35_01 --ionstype HCD --instrument High --MHClass MHC1 \  
+nextflow run SysteMHC-pipeline --dda_folder /path/to/dda_folder \  
+--comet_params Params/comet-hh-nofixmod.params \  
+--fragger_params Params/fragger-classI-hh-offset.params \  
+--msgf_params Params/msgf-QE-classI.params \  
+--mods Params/mymods --alleles HLA-A02_01,HLA-B35_01 \  
+--ionstype HCD --instrument High --MHClass MHC1 \  
 --protein_db Params/uniprot-human-reviewed_202108_iRT_plus_cRAP_targDecoy.fasta \   
 --neo no -resume  
 
