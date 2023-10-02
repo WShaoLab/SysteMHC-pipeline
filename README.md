@@ -1,5 +1,5 @@
 # SysteMHC-pipeline
-This is a computational pipeline for MS-based immunopeptidomics. 
+This is a computational pipeline for MS-based immunopeptidomics and used in [SysteMHC Atlas 2.0](https://systemhc.sjtu.edu.cn/)
 
 # Overview
 This pipeline contains several modules:  
