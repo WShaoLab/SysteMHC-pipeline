@@ -87,9 +87,12 @@ nextflow run /www/SysteMHC-pipeline/ --dda_folder /path/to/dda_folder \
 ### Note 
 * `--decoy` is the flag of reversed sequence, it must be 'DECOY_', 'rev_' or something else according to the fasta formated sequence used in database search. 
 * For the params of `--comet_params`, `--fragger_params` and `--msgf_params`, 'hh' represents high resolution of MS1 and MS2，while 'hl' represents high resolution of MS1 and low resolution of MS2. 'classI' is for MHC class I, whereas 'classII' is for MHC class II.
-* For `--msgf_params`, 'QE' means 'Q-Exactive', 'Q-Exactive HF' or 'Q-Exactive Plus'; 'Lumos' means 'Orbitrap Fusion Lumos'; 'TOF' means 'Triple-TOF'; 'LTQ' means 'LTQ-FT', 'LTQ-Orbitrap'. Users can refer to [Comet](https://comet-ms.sourceforge.net/), [MSFragger](https://github.com/Nesvilab/MSFragger) and [MSGF+](https://github.com/MSGFPlus/msgfplus)) to get the detailed information.
+* For `--msgf_params`, 'QE' means 'Q-Exactive', 'Q-Exactive HF' or 'Q-Exactive Plus'; 'Lumos' means 'Orbitrap Fusion Lumos'; 'TOF' means 'Triple-TOF'; 'LTQ' means 'LTQ-FT', 'LTQ-Orbitrap'. Users can refer to [Comet](https://comet-ms.sourceforge.net/), [MSFragger](https://github.com/Nesvilab/MSFragger) and [MSGF+](https://github.com/MSGFPlus/msgfplus) to get the detailed information.
 * `--alleles` indicates the alleles used in [NetMHCpan](https://services.healthtech.dtu.dk/services/NetMHCpan-4.1/) and [NetMHCIIpan](https://services.healthtech.dtu.dk/services/NetMHCIIpan-4.0/). Here `:` was changed to `_` to be compatiable with the commandline.
 * `--ionstype` means the fragmentation method in mzML file.
 * If a customized fasta file is used, the `--neo=Yes` means to find peptides not contained in the uniprot-reviewed proteins. 
 * In total, The params must be compatiable with each other.
 ###
+
+# Contact Us
+For issues in using SysteMHC-pipeline, please report to this GitHub repository.
