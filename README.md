@@ -19,15 +19,15 @@ This pipeline contains several modules:
    download the `ZIP` file.
 4. Move the SysteMHC-pipeline folder to somewhere you want, such as /www/SysteMHC-pipeline
 5. The `bin` file contains the scripts that will be used in the pipeline, the `Params` folder provides several default parameters and the `Fasta` provides Human and Mouse target-Decoy fasta formated sequence. For better and easy use of the pipeline, users are recommended to edit the nextflow.config file.  
-   * change the param `ptmname = '/path/SysteMHC-pipeline/Params/name_replace.csvh'` to `ptmname = '/www/SysteMHC-pipeline/Params/name_replace.csvh'` according to location in step 4. This is required.
-   * Also, users can change `mods`,`protein_db`,`comet_params`,`msgf_params`,`fragger_params` accordingly. This is optional as these params need to be changed to be compatiable with the mzML files and can be overwrote by commandline options.
+   * change the param `ptmname = '/path/SysteMHC-pipeline/Params/name_replace.csvh'` to `ptmname = '/www/SysteMHC-pipeline/Params/name_replace.csvh'` according to location in step 4. This is **required**.
+   * Also, users can change `mods`,`protein_db`,`comet_params`,`msgf_params`,`fragger_params` accordingly. This is **optional** as these params need to be changed to be compatiable with the mzML files and can be overwrote by commandline options.
    * The nextflow.config also defines the containers used in the pipeline. These containers are all created by Docker.
 6. In the first time when the user runs the pipeline, the contatiners will be downloaded automatically, so there is no need to download them manually. 
 
 # Usage
 $ nextflow run SysteMHC-pipeline/ --help  
 N E X T F L O W  ~  version 21.10.6  
-Launching `/SysteMHC-pipeline/main.nf` [crazy_heisenberg] - revision: f88b0d422b  
+Launching `SysteMHC-pipeline/main.nf` [crazy_heisenberg] - revision: f88b0d422b  
 
 -----------------------------------------
 Options:
@@ -53,25 +53,26 @@ Options:
 *  --neo:       is the fasta formated sequence file a customized one? Yes or no. (default: no)
 ------------------------------------------
 
-The output of this pipeline is a folder named 'Results'  
-##########################################  
-Comet Results will be stored in Results/Comet  
-MSGF+ Results will be stored in Results/MSGF  
-Msfragger Results will be stored in Results/Fragger  
-FDR calculation Results will be stored in Results/Peplevel_FDR  
-Sample Library will be stored in Results/SampleLib  
-Sample PTMs Results will be stored in Results/SamplePTMs  
-Sample non-canonical peptides will be stored in Results/SampleVariant  
-MHC specific library will be stored in Results/MHCSpecificLib  
-MHC specific non-canonical peptides will be stored in Results/Variant  
-MHC specific motifs will be stored in Results/MHCmotifs  
-MHC libraries will be stored in Results/MHCLib  
-MHC PTMs will be stored in Results/MHCPTMs  
-A brief summary will be stored in Results/Summary  
-##########################################  
+The output of this pipeline is a folder named **Results**  
+###
+Comet Results will be stored in **Results/Comet**  
+MSGF+ Results will be stored in **Results/MSGF**  
+Msfragger Results will be stored in **Results/Fragger**  
+FDR calculation Results will be stored in **Results/Peplevel_FDR**  
+Sample Library will be stored in **Results/SampleLib**  
+Sample PTMs Results will be stored in **Results/SamplePTMs**  
+Sample non-canonical peptides will be stored in **Results/SampleVariant**  
+MHC specific library will be stored in **Results/MHCSpecificLib**  
+MHC specific non-canonical peptides will be stored in **Results/Variant**  
+MHC specific motifs will be stored in **Results/MHCmotifs**  
+MHC libraries will be stored in **Results/MHCLib**  
+MHC PTMs will be stored in **Results/MHCPTMs**  
+A brief summary will be stored in **Results/Summary**  
+###
+------------------------------------------
 
 # Example
-nextflow run /www/SysteMHC-pipeline/ --dda_folder /path/to/dda_folder \  
+nextflow run /www/SysteMHC-pipeline/ --dda_folder /path/to/dda_folder/ \  
 --comet_params /path/to/comet-hh-nofixmod.params \  
 --fragger_params /path/to/fragger-classI-hh-offset.params \  
 --msgf_params /path/to/msgf-QE-classI.params \  
@@ -81,13 +82,13 @@ nextflow run /www/SysteMHC-pipeline/ --dda_folder /path/to/dda_folder \
 --fdr 0.01 --decoy DECOY_ --neo no
 
 ### if you configured the params in nextflow.config accordingly, then the following command will work the same as above  
-nextflow run /www/SysteMHC-pipeline/ --dda_folder /path/to/dda_folder \  
+nextflow run /www/SysteMHC-pipeline/ --dda_folder /path/to/dda_folder/ \  
 --alleles HLA-A02_01,HLA-B35_01  
 
 ### Note 
 * `--decoy` is the flag of reversed sequence, it must be 'DECOY_', 'rev_' or something else according to the fasta formated sequence used in database search. 
 * For the params of `--comet_params`, `--fragger_params` and `--msgf_params`, 'hh' represents high resolution of MS1 and MS2，while 'hl' represents high resolution of MS1 and low resolution of MS2. 'classI' is for MHC class I, whereas 'classII' is for MHC class II.
-* For `--msgf_params`, 'QE' means 'Q-Exactive', 'Q-Exactive HF' or 'Q-Exactive Plus'; 'Lumos' means 'Orbitrap Fusion Lumos'; 'TOF' means 'Triple-TOF'; 'LTQ' means 'LTQ-FT', 'LTQ-Orbitrap'. Users can refer to [Comet](https://comet-ms.sourceforge.net/), [MSFragger](https://github.com/Nesvilab/MSFragger) and [MSGF+](https://github.com/MSGFPlus/msgfplus) to get the detailed information.
+* For `--msgf_params`, 'QE' means 'Q-Exactive', 'Q-Exactive HF' or 'Q-Exactive Plus'; 'Lumos' means 'Orbitrap Fusion Lumos'; 'TOF' means 'Triple-TOF'; 'LTQ' means 'LTQ-FT', and 'LTQ-Orbitrap'. Users can refer to [Comet](https://comet-ms.sourceforge.net/), [MSFragger](https://github.com/Nesvilab/MSFragger) and [MSGF+](https://github.com/MSGFPlus/msgfplus) to get the detailed information.
 * `--alleles` indicates the alleles used in [NetMHCpan](https://services.healthtech.dtu.dk/services/NetMHCpan-4.1/) and [NetMHCIIpan](https://services.healthtech.dtu.dk/services/NetMHCIIpan-4.0/). Here `:` was changed to `_` to be compatiable with the commandline.
 * `--ionstype` means the fragmentation method in mzML file.
 * If a customized fasta file is used, the `--neo=Yes` means to find peptides not contained in the uniprot-reviewed proteins. 
@@ -95,4 +96,4 @@ nextflow run /www/SysteMHC-pipeline/ --dda_folder /path/to/dda_folder \
 ###
 
 # Contact Us
-For issues in using SysteMHC-pipeline, please report to this GitHub repository.
+For issues in using **SysteMHC-pipeline**, please report to this GitHub repository.
