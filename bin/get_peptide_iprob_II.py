@@ -20,15 +20,15 @@ def cal_fdr(inputda,decoy):
         data.loc[i,'fdr'] = np.round(fdr,4)
     return data
 
-def getprob(PSM,peptide):
+def getprob(PSM,peptide,fdrvalue):
     
     for i in range(PSM.shape[0]-1,0,-1):
-        if (PSM.loc[i,'fdr'] <= 0.01):
+        if (PSM.loc[i,'fdr'] <= float(fdrvalue)):
             pb1 = PSM.loc[i,'iProbability']
             break
 
     for i in range(peptide.shape[0]-1,0,-1):
-        if (peptide.loc[i,'fdr'] <= 0.01):
+        if (peptide.loc[i,'fdr'] <= float(fdrvalue)):
             pb2 = peptide.loc[i,'iProbability']
             break
     pb = max(pb1,pb2)
@@ -37,15 +37,15 @@ def getprob(PSM,peptide):
 dataori = pd.read_csv(sys.argv[1],sep=',')
 iprob = pd.read_csv(sys.argv[2],header=None)
 dataori['iProbability']=iprob.iloc[:,0]
-datadecoy = dataori[dataori['Protein'].str.contains('DECOY_')]
-datatarget = dataori[~dataori['Protein'].str.contains('DECOY_')]
+datadecoy = dataori[dataori['Protein'].str.contains(sys.argv[3])]
+datatarget = dataori[~dataori['Protein'].str.contains(sys.argv[3])]
 data = pd.concat([datatarget,datadecoy])
 data = data.sort_values(by=['iProbability'],ascending=False)
 PSM = cal_fdr(data,sys.argv[3])
 data1 = data.drop_duplicates(subset=['Peptide_Sequence'],keep='first')
 peptide = cal_fdr(data1,sys.argv[3])
 
-pb1,pb2,pb = getprob(PSM,peptide)
+pb1,pb2,pb = getprob(PSM,peptide,sys.argv[4])
 data2 = PSM.loc[PSM.iProbability >= pb]
 data3 = peptide.loc[peptide.iProbability >= pb]
 data4 = data3.loc[(data3['Peptide_Sequence'].str.len()>=9) & (data3['Peptide_Sequence'].str.len()<=25)]
