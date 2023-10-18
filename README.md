@@ -17,9 +17,7 @@ To run this pipeline, we suppose that the random access memory (RAM) of your com
 1. Install [Docker](https://docs.docker.com/get-docker/)
 2. Install [Nextflow](https://www.nextflow.io/docs/latest/getstarted.html#installation)
 3. Download SysteMHC-pipeline:  
-   `git clone https://github.com/WShaoLab/SysteMHC-pipeline`  
-   or  
-   download the `ZIP` file.
+   `git clone https://github.com/WShaoLab/SysteMHC-pipeline` **or** download the `ZIP` file.
 4. Move the SysteMHC-pipeline folder to somewhere you want, such as /www/SysteMHC-pipeline
 5. The `bin` file contains the scripts that will be used in the pipeline, the `Params` folder provides several default parameters and the `Fasta` provides Human and Mouse target-Decoy fasta formated sequence. For better and easy use of the pipeline, users are recommended to edit the nextflow.config file.  
    * change the memoey in param `msgf_memory` and `fragger_memory` according to the resource of your computer. This is **required**.
