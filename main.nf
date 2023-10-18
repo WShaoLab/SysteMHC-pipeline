@@ -46,7 +46,7 @@ process CometSearch {
 
     cache "lenient"
     cpus params.comet_threads
-    //memory 30.GB
+    memory params.comet_memory
 
     publishDir 'Results/Comet', mode: 'link'
 
@@ -127,7 +127,7 @@ process MSGFPlusSearch {
     mkdir MZid
     for file in $mzMLs
     do
-        java -jar -Xmx64G /opt/MSGFPlus_v20210322/MSGFPlus.jar -s \$file -conf $msgf_params > msgf.log
+        java -jar -Xmx$params.msgf_memory /opt/MSGFPlus_v20210322/MSGFPlus.jar -s \$file -conf $msgf_params > msgf.log
         mv *.mzid ./MZid
     done
   
@@ -191,7 +191,7 @@ process MsfraggerSearch {
    
     cache "lenient"
     cpus params.fragger_threads
-    // memory 214.GB
+    
     publishDir 'Results/Fragger', mode: 'link'
     
     input:
@@ -208,7 +208,7 @@ process MsfraggerSearch {
     """
     sed -i 's,num_threads.*,num_threads = $params.fragger_threads,' "$fragger_params"
     sed -i 's,database_name.*,database_name = $protein_db,' "$fragger_params"
-    java -jar -Xmx214G /opt/MSFragger-3.4/MSFragger-3.4.jar $fragger_params $mzML
+    java -jar -Xmx$params.fragger_memory /opt/MSFragger-3.4/MSFragger-3.4.jar $fragger_params $mzML
 
     """
 }
@@ -382,7 +382,6 @@ if (params.alleles == 'noalleles') {
         input:
 
         file 'pepidx' from LibraryconspidxOut
-        file 'pname' from file(params.ptmname)
 
         output:
     
@@ -400,7 +399,7 @@ if (params.alleles == 'noalleles') {
             touch none.svg
             touch none.png
         else
-            $baseDir/bin/plot_ptmheatmap.py modify.csv $pname
+            $baseDir/bin/plot_ptmheatmap.py modify.csv $baseDir/Params/name_replace.csvh
         fi
         
         """
@@ -657,7 +656,6 @@ else {
         input:
 
         file 'pepidx' from LibraryconspidxOut
-        file 'pname' from file(params.ptmname)
 
         output:
     
@@ -675,7 +673,7 @@ else {
             touch none.svg
             touch none.png
         else
-            $baseDir/bin/plot_ptmheatmap.py modify.csv $pname
+            $baseDir/bin/plot_ptmheatmap.py modify.csv $baseDir/Params/name_replace.csvh
         fi
         
         """
@@ -689,7 +687,6 @@ else {
         input:
 
         file 'pepidx' from Library3conpepOut
-        file 'pname' from file(params.ptmname)
 
         output:
     
@@ -706,7 +703,7 @@ else {
             touch none.svg
             touch none.png
         else
-            $baseDir/bin/plot_ptmheatmap.py modify.csv $pname
+            $baseDir/bin/plot_ptmheatmap.py modify.csv $baseDir/Params/name_replace.csvh
         fi
        
         """
