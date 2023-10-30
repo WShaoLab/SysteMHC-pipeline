@@ -78,9 +78,9 @@ nextflow run /www/SysteMHC-pipeline/ --dda_folder /path/to/dda_folder/ \
 --comet_params /path/to/comet-hh-nofixmod.params \  
 --fragger_params /path/to/fragger-classI-hh-offset.params \  
 --msgf_params /path/to/msgf-QE-classI.params \  
---mods Params/mymods --alleles HLA-A02_01,HLA-B35_01 \  
+--mods /path/to/mymods --alleles HLA-A02_01,HLA-B35_01 \  
 --ionstype HCD --instrument High --MHClass MHC1 \  
---protein_db Params/uniprot-human-reviewed_202108_iRT_plus_cRAP_targDecoy.fasta \   
+--protein_db /path/to/uniprot-human-reviewed_202108_iRT_plus_cRAP_targDecoy.fasta \   
 --fdr 0.01 --decoy DECOY_ --neo no
 
 ### if you configured the params in nextflow.config accordingly, then the following command will work the same as above  
