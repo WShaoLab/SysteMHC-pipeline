@@ -97,6 +97,7 @@ nextflow run /www/SysteMHC-pipeline/ --dda_folder /path/to/dda_folder/ \
 * If a customized fasta file is used, the `--neo=Yes` means to find peptides not contained in the uniprot-reviewed proteins. 
 * In total, The params must be compatiable with each other.
 ###
-
+# How to cite
+Huang, X., Gan, Z., Cui, H., Lan, T., Liu, Y., Caron, E., & Shao, W. (2023). The SysteMHC Atlas v2.0, an updated resource for mass spectrometry-based immunopeptidomics. Nucleic acids research (https://doi.org/10.1093/nar/gkad1068)
 # Contact Us
 For issues in using **SysteMHC-pipeline**, please report to this GitHub repository.
